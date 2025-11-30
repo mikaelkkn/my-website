@@ -1,0 +1,29 @@
+{
+  "name": "my-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikaelkkn/my-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mikaelkkn/my-website/issues"
+  },
+  "homepage": "https://github.com/mikaelkkn/my-website#readme",
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "astro": "^5.16.3",
+    "typescript": "^5.9.3"
+  }
+}
