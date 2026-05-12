@@ -25,3 +25,6 @@ lerna-debug.log*
 # IDE
 .vscode/
 .idea/
+
+# agents
+settings.local.json
