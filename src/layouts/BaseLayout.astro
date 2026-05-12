@@ -1,10 +1,27 @@
 ---
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/700.css";
+
 interface Props {
   title: string;
   description?: string;
 }
 
 const { title, description = "Software engineer navigating the digital frontier" } = Astro.props;
+
+const csp = [
+  "default-src 'self'",
+  "script-src 'none'",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
+  "img-src 'self' data:",
+  "connect-src 'self'",
+  "base-uri 'self'",
+  "form-action 'none'",
+  "frame-ancestors 'none'",
+  "object-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
 ---
 
 <!DOCTYPE html>
@@ -12,12 +29,11 @@ const { title, description = "Software engineer navigating the digital frontier"
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content={csp}>
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content={description}>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <title>{title}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <slot />
