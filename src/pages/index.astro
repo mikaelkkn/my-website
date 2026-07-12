@@ -1,259 +1,185 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const currentYear = new Date().getFullYear();
+const links = [
+  {
+    label: "Email",
+    href: "mailto:hi@mikaelkalkmann.com",
+    description: "hi@mikaelkalkmann.com",
+    external: false,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/mikael-kalkmann/",
+    description: "Professional profile and experience.",
+    external: true,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/mikaelkkn",
+    description: "Code and open-source projects.",
+    external: true,
+  },
+];
 ---
 
-<BaseLayout title="Mikael Kalkmann - Software Engineer">
-  <main class="terminal">
-    <div class="terminal-header">
-      <span class="terminal-title">mikael@kalkmann:~$</span>
-      <div class="terminal-controls">
-        <span class="control minimize"></span>
-        <span class="control maximize"></span>
-        <span class="control close"></span>
-      </div>
-    </div>
+<BaseLayout title="Mikael Kalkmann">
+  <div class="root">
+    <header>
+      <a href="/" class="name">Mikael Kalkmann</a>
+      <span class="subtitle">Software Engineer</span>
+    </header>
 
-    <div class="terminal-body">
-      <div class="command-output">
-        <div class="command-line">
-          <span class="prompt">visitor@terminal:~$</span>
-          <span class="command">cat about.txt</span>
+    <main>
+      <section>
+        <span class="label">About</span>
+        <p class="muted">
+          I still remember the sense of fascination the first time I
+          compiled source code. Today, I transform lines of code into
+          applications that help businesses and people grow every day.
+        </p>
+      </section>
+
+      <section class="section">
+        <span class="label">Today</span>
+        <p class="muted">
+          I'm a tech lead at CWI Software, where I guide the technical direction
+          of our work and help the people around me do their best.
+        </p>
+      </section>
+
+      <section class="section group">
+        <span class="label">Elsewhere</span>
+        <div class="list">
+          {
+            links.map((link) => (
+              <a
+                class="row"
+                href={link.href}
+                {...(link.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+              >
+                <span>{link.label}</span>
+                <span class="muted">{link.description}</span>
+              </a>
+            ))
+          }
         </div>
-
-        <div class="output">
-          <p>
-            <strong>Greetings</strong> visitor.
-          </p>
-          <p>I'm a software engineer navigating the digital frontier.</p>
-          <p>
-            This page is just a straightforward corner of the web to say who I
-            am and how to reach me.
-          </p>
-        </div>
-      </div>
-
-      <div class="command-output">
-        <div class="command-line">
-          <span class="prompt">visitor@terminal:~$</span>
-          <span class="command">ls -la contact/</span>
-        </div>
-
-        <div class="output contact-links">
-          <div class="file-line">
-            <span class="permissions">-rw-r--r--</span>
-            <span class="size">256B</span>
-            <a href="mailto:hi@mikaelkalkmann.com" class="file-link">
-              <span class="icon">📧</span> email.txt
-            </a>
-          </div>
-          <div class="file-line">
-            <span class="permissions">-rw-r--r--</span>
-            <span class="size">512B</span>
-            <a
-              href="https://www.linkedin.com/in/mikael-kalkmann/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="file-link"
-            >
-              <span class="icon">💼</span> linkedin.url
-            </a>
-          </div>
-          <div class="file-line">
-            <span class="permissions">-rw-r--r--</span>
-            <span class="size">1.1K</span>
-            <a
-              href="https://github.com/mikaelkkn"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="file-link"
-            >
-              <span class="icon">🐙</span> github.url
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="command-output">
-        <div class="command-line">
-          <span class="prompt">visitor@terminal:~$</span>
-          <span class="command-cursor blink">_</span>
-        </div>
-      </div>
-
-      <footer class="terminal-footer">
-        <p>© {currentYear} Mikael Kalkmann</p>
-      </footer>
-    </div>
-  </main>
+      </section>
+    </main>
+  </div>
 </BaseLayout>
 
 <style>
-  .terminal {
-    max-width: 900px;
-    margin: 40px auto;
-    background-color: rgba(39, 40, 34, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 8px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-    overflow: hidden;
-    border: 1px solid rgba(62, 61, 50, 0.5);
+  .root {
+    max-width: 692px;
+    margin: 0 auto;
+    padding: 48px 24px;
   }
 
-  .terminal-header {
-    background-color: rgba(30, 31, 28, 0.9);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(62, 61, 50, 0.5);
-  }
-
-  .terminal-title {
-    font-size: 14px;
-    color: #75715e;
-    font-weight: 700;
-  }
-
-  .terminal-controls {
-    display: flex;
-    gap: 8px;
-  }
-
-  .control {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-  }
-
-  .close {
-    background-color: #f92672;
-  }
-  .minimize {
-    background-color: #e6db74;
-  }
-  .maximize {
-    background-color: #a6e22e;
-  }
-
-  .terminal-body {
-    padding: 20px;
-  }
-
-  .command-output {
-    margin-bottom: 24px;
-  }
-
-  .command-line {
-    margin-bottom: 12px;
-  }
-
-  .prompt {
-    color: #a6e22e;
-    font-weight: 700;
-  }
-
-  .command {
-    color: #66d9ef;
-    margin-left: 8px;
-  }
-
-  .command-cursor {
-    color: #f8f8f2;
-    margin-left: 8px;
-  }
-
-  .output {
-    padding-left: 16px;
-    color: #f8f8f2;
-  }
-
-  .output p {
-    margin-bottom: 16px;
-  }
-
-  .output strong {
-    color: #f92672;
-  }
-
-  .contact-links {
-    padding-left: 16px;
-  }
-
-  .file-line {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 8px;
-    color: #75715e;
-  }
-
-  .permissions {
-    font-size: 14px;
-    min-width: 100px;
-    color: #75715e;
-  }
-
-  .size {
-    font-size: 14px;
-    min-width: 50px;
-    color: #ae81ff;
-  }
-
-  .file-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #66d9ef;
-    font-size: 16px;
-  }
-
-  .file-link:hover {
-    color: #a6e22e;
-  }
-
-  .icon {
-    font-size: 18px;
-  }
-
-  .terminal-footer {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #3e3d32;
-    text-align: center;
-    color: #75715e;
-    font-size: 14px;
-  }
-
-  @media (max-width: 768px) {
-    .terminal {
-      margin: 0;
-      border-radius: 0;
-      border: none;
-      box-shadow: none;
-      background-color: #272822;
-      min-height: 100vh;
+  @media (min-width: 640px) {
+    .root {
+      padding: 128px 24px;
     }
+  }
 
-    .terminal-body {
-      padding: 16px;
+  @media (min-width: 768px) {
+    .root {
+      padding: 64px 24px;
     }
+  }
 
-    .output {
-      font-size: 14px;
+  /* ---- header ---- */
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 128px;
+  }
+
+  .name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--text-secondary);
+  }
+
+  /* ---- section labels ---- */
+  .label {
+    display: block;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .label {
+      margin-bottom: 16px;
     }
+  }
 
-    .file-link {
-      font-size: 14px;
+  /* ---- text ---- */
+  .muted {
+    color: var(--text-secondary);
+  }
+
+  .mt {
+    margin-top: 16px;
+  }
+
+  /* ---- section spacing ---- */
+  .section {
+    margin-top: 64px;
+  }
+
+  @media (min-width: 640px) {
+    .section {
+      margin-top: 128px;
     }
+  }
 
-    .permissions,
-    .size {
-      font-size: 12px;
+  /* offsets the row padding so the group aligns with the label */
+  .group {
+    margin-bottom: -12px;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  @media (min-width: 640px) {
+    .list {
+      gap: 16px;
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    margin: 0 -12px;
+    padding: 0 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .row:hover {
+    background-color: var(--hover-bg);
+  }
+
+  @media (min-width: 640px) {
+    .row {
+      padding: 12px;
     }
   }
 </style>

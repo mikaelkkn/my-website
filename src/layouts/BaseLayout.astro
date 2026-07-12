@@ -1,13 +1,13 @@
 ---
-import "@fontsource/jetbrains-mono/400.css";
-import "@fontsource/jetbrains-mono/700.css";
+import "@fontsource-variable/inter/opsz.css";
+import "@fontsource-variable/inter/opsz-italic.css";
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = "Software engineer navigating the digital frontier" } = Astro.props;
+const { title, description = "Software engineer building for the web." } = Astro.props;
 
 const csp = [
   "default-src 'self'",
@@ -33,6 +33,8 @@ const csp = [
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content={description}>
   <meta name="google-site-verification" content="cJPZsaeH2HIXxfwUIqzarIqgUUWpg37dnX9wOtShQy8" />
+  <meta name="theme-color" content="#fdfdfc">
+  <meta name="color-scheme" content="light">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <title>{title}</title>
 </head>
@@ -42,59 +44,56 @@ const csp = [
 </html>
 
 <style is:global>
+  :root {
+    --bg: #fdfdfc;
+    --text: #21201c;         /* primary   */
+    --text-secondary: #63635e; /* muted    */
+    --text-tertiary: #82827c;  /* subtle   */
+    --hover-bg: #f5f4f4;
+    --font-sans: "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  body {
-    background: 
-      linear-gradient(45deg, #1a1a1a 25%, transparent 25%),
-      linear-gradient(-45deg, #1a1a1a 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #1a1a1a 75%),
-      linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-    background-color: #0d0d0d;
-    color: #f8f8f2;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 16px;
-    line-height: 1.6;
-    min-height: 100vh;
-    padding: 20px;
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
   }
 
-  @media (max-width: 768px) {
-    body {
-      padding: 0;
-      font-size: 14px;
-    }
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-optical-sizing: auto;
+    font-feature-settings: "cv01", "ss03";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background-color: #49483e;
-    color: #f8f8f2;
+    background-color: #d8e2fc;
+    color: var(--text);
   }
 
+  /* inline prose links */
   a {
-    color: #66d9ef;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    border-bottom: 1px solid transparent;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--text-tertiary);
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    transition: text-decoration-color 0.15s ease, color 0.15s ease;
   }
 
   a:hover {
-    color: #a6e22e;
-    border-bottom-color: #a6e22e;
-  }
-
-  .blink {
-    animation: blink 1s step-end infinite;
-  }
-
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+    text-decoration-color: var(--text);
   }
 </style>
